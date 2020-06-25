@@ -15,10 +15,17 @@ import java.util.function.Function;
 public class PropertyPlugin implements WebServerPluginRegistry {
     private final List<Function<CordaRPCOps, ?>> webApis = ImmutableList.of(PropertyTransferApi::new);
 
-    private final Map<String, String> staticServeDirs =
-            ImmutableMap.of(
-            "landDepartment", getClass().getClassLoader().getResource("landDepartmentWeb").toExternalForm()
-    );
+    private final Map<String, String> staticServeDirs;
+
+
+
+    public PropertyPlugin(){
+        getClass().getClassLoader();
+        System.out.println(getClass().getClassLoader().getResource("landDepartmentWeb"));
+        //getClass().getClassLoader().getResource("PropertyTransferApi").toExternalForm();
+        this.staticServeDirs=ImmutableMap.of(
+                "property", "");
+    }
 
     @Override @NotNull public List<Function<CordaRPCOps, ?>> getWebApis() { return webApis; }
     @Override @NotNull public Map<String, String> getStaticServeDirs() { return staticServeDirs; }
